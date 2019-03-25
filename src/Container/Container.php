@@ -22,11 +22,11 @@ class Container extends PimpleContainer implements ContainerInterface
             $provider->setContainer($this);
         }
     
-        $provider->register();
-    
         foreach ($values as $k => $v) {
             $this->offsetSet($k, $v);
         }
+    
+        $provider->register();
     
         return $this;
     }

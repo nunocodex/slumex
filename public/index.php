@@ -1,10 +1,11 @@
 <?php
 
-use NunoCodex\Slumex\WordPress\Plugin;
-
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$plugin = new Plugin();
+$app = new \NunoCodex\Slumex\Container\Container();
 
+$app->registerService(new \NunoCodex\Slumex\ServiceProvider\DotEnv(), [
+    'dotenv.path' => __DIR__
+]);
 
-dump($plugin);
+dump($app, $_ENV);

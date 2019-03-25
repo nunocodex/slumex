@@ -3,7 +3,6 @@
 namespace NunoCodex\Slumex\WordPress;
 
 use NunoCodex\Slumex\Container\Container;
-use NunoCodex\Slumex\Container\ContainerAwareInterface;
 use NunoCodex\Slumex\Container\ContainerInterface;
 
 /**

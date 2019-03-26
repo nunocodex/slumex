@@ -9,7 +9,8 @@
     "require": {
         "pimple/pimple": "^3.2",
         "vlucas/phpdotenv": "^3.3",
-        "hassankhan/config": "^2.0"
+        "hassankhan/config": "^2.0",
+        "symfony/console": "^4.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2"
@@ -21,5 +22,12 @@
         "files": [
             "helpers.php"
         ]
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --coverage-html coverage",
+        "var-dumper-server": "php vendor/symfony/var-dumper/Resources/bin/var-dump-server"
+    },
+    "config": {
+        "process-timeout": 0
     }
 }

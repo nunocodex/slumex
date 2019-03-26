@@ -15,7 +15,7 @@ class DotEnv implements ServiceProviderInterface, ContainerAwareInterface
     use ContainerAwareTrait;
 
     /**
-     *
+     * Register Service Provider
      */
     public function register()
     {
@@ -27,8 +27,6 @@ class DotEnv implements ServiceProviderInterface, ContainerAwareInterface
 
         $path = $container->get('dot_env.path');
         
-        
-
         if (!file_exists($path . '/.env')) {
             return;
         }

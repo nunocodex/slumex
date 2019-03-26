@@ -8,7 +8,8 @@
     }],
     "require": {
         "pimple/pimple": "^3.2",
-        "vlucas/phpdotenv": "^3.3"
+        "vlucas/phpdotenv": "^3.3",
+        "hassankhan/config": "^2.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2"

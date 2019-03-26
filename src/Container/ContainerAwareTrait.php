@@ -17,7 +17,7 @@ trait ContainerAwareTrait
     /**
      * Get Container
      *
-     * @return ContainerInterface
+     * @return ContainerInterface|Container
      */
     public function getContainer(): ContainerInterface
     {

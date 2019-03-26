@@ -14,9 +14,9 @@ class Addon extends Container implements AddonInterface
     /**
      * @param HookProviderInterface $provider
      * @param array $values
-     * @return ContainerInterface
+     * @return ContainerInterface|$this
      */
-    public function registerHook(HookProviderInterface $provider, array $values = []): ContainerInterface
+    public function registerHook(HookProviderInterface $provider, array $values = [])
     {
         return $this->registerProvider($provider, $values);
     }

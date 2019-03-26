@@ -9,7 +9,7 @@ namespace NunoCodex\Slumex\Container;
 interface ServiceProviderInterface
 {
     /**
-     *
+     * Register Service Provider
      */
     public function register();
 }

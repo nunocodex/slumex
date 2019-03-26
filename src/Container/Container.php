@@ -14,9 +14,9 @@ class Container extends PimpleContainer implements ContainerInterface
     /**
      * @param ServiceProviderInterface|HookProviderInterface $provider
      * @param array $values
-     * @return ContainerInterface
+     * @return ContainerInterface|$this
      */
-    protected function registerProvider($provider, array $values = []): ContainerInterface
+    protected function registerProvider($provider, array $values = [])
     {
         if ($provider instanceof ContainerAwareInterface) {
             $provider->setContainer($this);
@@ -52,9 +52,9 @@ class Container extends PimpleContainer implements ContainerInterface
     /**
      * @param ServiceProviderInterface $provider
      * @param array $values
-     * @return ContainerInterface
+     * @return ContainerInterface|$this
      */
-    public function registerService(ServiceProviderInterface $provider, array $values = []): ContainerInterface
+    public function registerService(ServiceProviderInterface $provider, array $values = [])
     {
         return $this->registerProvider($provider, $values);
     }

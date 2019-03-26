@@ -13,24 +13,26 @@ use NunoCodex\Slumex\Container\ServiceProviderInterface;
 class DotEnv implements ServiceProviderInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
-    
+
     /**
      *
      */
     public function register()
     {
         $container = $this->getContainer();
-    
-        if (!$container->has('dotenv.path')) {
+
+        if (!$container->has('dot_env.path')) {
             return;
         }
+
+        $path = $container->get('dot_env.path');
         
-        $path = $container->get('dotenv.path');
         
+
         if (!file_exists($path . '/.env')) {
             return;
         }
-        
-        (\Dotenv\Dotenv::create($container->get('dotenv.path')))->load();
+
+        (\Dotenv\Dotenv::create($container->get('dot_env.path')))->load();
     }
 }

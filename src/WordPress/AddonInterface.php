@@ -15,5 +15,5 @@ interface AddonInterface
      * @param array $values
      * @return ContainerInterface
      */
-    public function registerHook(HookProviderInterface $provider, array $values = []): ContainerInterface;
+    public function registerHook(HookProviderInterface $provider, array $values = []);
 }

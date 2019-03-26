@@ -9,7 +9,7 @@ namespace NunoCodex\Slumex\WordPress;
 interface HookProviderInterface
 {
     /**
-     *
+     * Register WordPress Hooks
      */
     public function register();
 }

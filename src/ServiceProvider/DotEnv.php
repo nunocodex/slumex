@@ -19,18 +19,16 @@ class DotEnv implements ServiceProviderInterface, ContainerAwareInterface
      */
     public function register()
     {
-        $container = $this->getContainer();
-
-        if (!$container->has('dot_env.path')) {
+        if (!$this->container->hasParameter('dot_env.path')) {
             return;
         }
 
-        $path = $container->get('dot_env.path');
+        $path = $this->container->getParameter('dot_env.path');
         
         if (!file_exists($path . '/.env')) {
             return;
         }
 
-        (\Dotenv\Dotenv::create($container->get('dot_env.path')))->load();
+        (\Dotenv\Dotenv::create($this->container->getParameter('dot_env.path')))->load();
     }
 }

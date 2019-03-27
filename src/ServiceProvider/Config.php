@@ -2,7 +2,6 @@
 
 namespace NunoCodex\Slumex\ServiceProvider;
 
-use NunoCodex\Slumex\Container\Container;
 use NunoCodex\Slumex\Container\ContainerAwareInterface;
 use NunoCodex\Slumex\Container\ContainerAwareTrait;
 use NunoCodex\Slumex\Container\ServiceProviderInterface;
@@ -20,15 +19,12 @@ class Config implements ServiceProviderInterface, ContainerAwareInterface
      */
     public function register()
     {
-        $container = $this->getContainer();
-        
-        if (!$container->has('config.defaults')) {
+        if (!$this->container->hasParameter('config.defaults')) {
             return;
         }
         
-        $container['config'] = function (Container $c) {
-            return new \Noodlehaus\Config($c->get('config.defaults'));
-        };
+        $this->container
+            ->register('config', \Noodlehaus\Config::class)
+            ->addArgument('%config.defaults%');
     }
-    
 }

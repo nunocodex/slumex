@@ -3,37 +3,21 @@
 namespace NunoCodex\Slumex\Container;
 
 /**
- * ContainerAwareTrait
+ * Trait ContainerAwareTrait
+ * @package NunoCodex\Slumex\Container
  */
 trait ContainerAwareTrait
 {
     /**
-     * Container
-     *
-     * @var ContainerInterface
+     * @var ContainerInterface|Container
      */
     protected $container;
-
+    
     /**
-     * Get Container
-     *
-     * @return ContainerInterface|Container
-     */
-    public function getContainer(): ContainerInterface
-    {
-        return $this->container;
-    }
-
-    /**
-     * Set Container
-     *
      * @param ContainerInterface $container
-     * @return $this
      */
-    public function setContainer(ContainerInterface $container)
+    public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-
-        return $this;
     }
 }

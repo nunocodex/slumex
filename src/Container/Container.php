@@ -3,13 +3,13 @@
 namespace NunoCodex\Slumex\Container;
 
 use NunoCodex\Slumex\WordPress\HookProviderInterface;
-use Pimple\Container as PimpleContainer;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class Container
  * @package NunoCodex\Slumex\Container
  */
-class Container extends PimpleContainer implements ContainerInterface
+class Container extends ContainerBuilder implements ContainerInterface
 {
     /**
      * @param ServiceProviderInterface|HookProviderInterface $provider
@@ -23,32 +23,14 @@ class Container extends PimpleContainer implements ContainerInterface
         }
     
         foreach ($values as $k => $v) {
-            $this->offsetSet($k, $v);
+            $this->setParameter($k, $v);
         }
-    
+        
         $provider->register();
     
         return $this;
     }
     
-    /**
-     * @param string $id
-     * @return mixed
-     */
-    public function get($id)
-    {
-        return $this->offsetGet($id);
-    }
-
-    /**
-     * @param string $id
-     * @return bool
-     */
-    public function has($id)
-    {
-        return $this->offsetExists($id);
-    }
-
     /**
      * @param ServiceProviderInterface $provider
      * @param array $values

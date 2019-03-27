@@ -3,18 +3,11 @@
 namespace NunoCodex\Slumex\WordPress;
 
 /**
- * Trait HookProviderTrait
+ * Interface HookAwareInterface
  * @package NunoCodex\Slumex\WordPress
  */
-trait HookProviderTrait
+interface HookAwareInterface
 {
-    /**
-     * Internal property to track closures attached to WordPress hooks.
-     *
-     * @var array
-     */
-    protected $filter_map = [];
-    
     /**
      * Add a WordPress filter.
      *
@@ -24,15 +17,7 @@ trait HookProviderTrait
      * @param  int      $arg_count
      * @return bool true
      */
-    public function addFilter($hook, $method, $priority = 10, $arg_count = 1)
-    {
-        return add_filter(
-            $hook,
-            $this->mapFilter($this->getWpFilterId($hook, $method, $priority), $method, $arg_count),
-            $priority,
-            $arg_count
-        );
-    }
+    function addFilter($hook, $method, $priority = 10, $arg_count = 1);
     
     /**
      * Add a WordPress action.
@@ -45,10 +30,7 @@ trait HookProviderTrait
      * @param  int      $arg_count
      * @return bool true
      */
-    public function addAction($hook, $method, $priority = 10, $arg_count = 1)
-    {
-        return $this->addFilter($hook, $method, $priority, $arg_count);
-    }
+    function addAction($hook, $method, $priority = 10, $arg_count = 1);
     
     /**
      * Remove a WordPress filter.
@@ -59,15 +41,7 @@ trait HookProviderTrait
      * @param  int      $arg_count
      * @return bool Whether the function existed before it was removed.
      */
-    public function removeFilter($hook, $method, $priority = 10, $arg_count = 1)
-    {
-        return remove_filter(
-            $hook,
-            $this->mapFilter($this->getWpFilterId($hook, $method, $priority), $method, $arg_count),
-            $priority,
-            $arg_count
-        );
-    }
+    function removeFilter($hook, $method, $priority = 10, $arg_count = 1);
     
     /**
      * Remove a WordPress action.
@@ -80,10 +54,7 @@ trait HookProviderTrait
      * @param  int      $arg_count
      * @return bool Whether the function is removed.
      */
-    public function removeAction($hook, $method, $priority = 10, $arg_count = 1)
-    {
-        return $this->removeFilter($hook, $method, $priority, $arg_count);
-    }
+    function removeAction($hook, $method, $priority = 10, $arg_count = 1);
     
     /**
      * Get a unique ID for a hook based on the internal method, hook, and priority.
@@ -93,10 +64,7 @@ trait HookProviderTrait
      * @param  int    $priority
      * @return bool|string
      */
-    public function getWpFilterId($hook, $method, $priority)
-    {
-        return _wp_filter_build_unique_id($hook, [$this, $method], $priority);
-    }
+    function getWpFilterId($hook, $method, $priority);
     
     /**
      * Map a filter to a closure that inherits the class' internal scope.
@@ -108,14 +76,5 @@ trait HookProviderTrait
      * @param  $arg_count
      * @return \Closure The callable actually attached to a WP hook
      */
-    public function mapFilter($id, $method, $arg_count)
-    {
-        if (empty($this->filter_map[$id])) {
-            $this->filter_map[$id] = function () use ($method, $arg_count) {
-                return call_user_func_array([$this, $method], array_slice(func_get_args(), 0, $arg_count));
-            };
-        }
-        
-        return $this->filter_map[$id];
-    }
+    function mapFilter($id, $method, $arg_count);
 }

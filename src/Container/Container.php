@@ -2,7 +2,6 @@
 
 namespace NunoCodex\Slumex\Container;
 
-use NunoCodex\Slumex\WordPress\HookProviderInterface;
 use Illuminate\Container\Container as BaseContainer;
 
 /**
@@ -12,11 +11,11 @@ use Illuminate\Container\Container as BaseContainer;
 class Container extends BaseContainer implements ContainerInterface
 {
     /**
-     * @param ServiceProviderInterface|HookProviderInterface $provider
+     * @param ServiceProviderInterface $provider
      * @param array $values
      * @return ContainerInterface|$this
      */
-    protected function registerProvider($provider, array $values = [])
+    public function register($provider, array $values = [])
     {
         if ($provider instanceof ContainerAwareInterface) {
             $provider->setContainer($this);
@@ -47,15 +46,5 @@ class Container extends BaseContainer implements ContainerInterface
     public function has($id)
     {
         return $this->offsetExists($id);
-    }
-
-    /**
-     * @param ServiceProviderInterface $provider
-     * @param array $values
-     * @return ContainerInterface|$this
-     */
-    public function registerService(ServiceProviderInterface $provider, array $values = [])
-    {
-        return $this->registerProvider($provider, $values);
     }
 }

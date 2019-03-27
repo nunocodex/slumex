@@ -5,11 +5,11 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $app = new \NunoCodex\Slumex\Container\Container();
 
 $app
-    ->registerService(new \NunoCodex\Slumex\ServiceProvider\DotEnv(), [
+    ->register(new \NunoCodex\Slumex\ServiceProvider\DotEnv(), [
         'dot_env.path' => __DIR__
     ])
     
-    ->registerService(new \NunoCodex\Slumex\ServiceProvider\Config(), [
+    ->register(new \NunoCodex\Slumex\ServiceProvider\Config(), [
         'config.defaults' => include __DIR__ . '/config.php'
     ])
 ;

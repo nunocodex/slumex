@@ -15,5 +15,5 @@ interface ContainerInterface extends PsrContainerInterface
      * @param array $values
      * @return ContainerInterface
      */
-    public function registerService(ServiceProviderInterface $provider, array $values = []);
+    public function register(ServiceProviderInterface $provider, array $values = []);
 }

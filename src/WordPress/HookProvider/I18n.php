@@ -2,6 +2,7 @@
 
 namespace NunoCodex\Slumex\WordPress\HookProvider;
 
+
 use NunoCodex\Slumex\Container\ContainerAwareInterface;
 use NunoCodex\Slumex\Container\ContainerAwareTrait;
 use NunoCodex\Slumex\Container\ServiceProviderInterface;
@@ -12,7 +13,7 @@ use NunoCodex\Slumex\WordPress\HookProviderTrait;
  * Class I18n
  * @package NunoCodex\Slumex\WordPress\HookProvider
  */
-class I18n implements HookAwareInterface, ContainerAwareInterface, ServiceProviderInterface
+class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwareInterface
 {
     use HookProviderTrait, ContainerAwareTrait;
     
@@ -33,7 +34,9 @@ class I18n implements HookAwareInterface, ContainerAwareInterface, ServiceProvid
      */
     protected function loadTextdomain()
     {
-        $plugin_rel_path = dirname($this->getContainer()->get('plugin.basename')) . '/languages';
-        load_plugin_textdomain($this->getContainer()->get('plugin.slug'), false, $plugin_rel_path);
+        $c = $this->getContainer();
+        
+        $plugin_rel_path = dirname($c->get('plugin.basename')) . '/languages';
+        load_plugin_textdomain($c->get('plugin.slug'), false, $plugin_rel_path);
     }
 }

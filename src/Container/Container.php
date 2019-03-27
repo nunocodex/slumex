@@ -29,22 +29,4 @@ class Container extends BaseContainer implements ContainerInterface
     
         return $this;
     }
-    
-    /**
-     * @param string $id
-     * @return mixed
-     */
-    public function get($id)
-    {
-        return $this->offsetGet($id);
-    }
-
-    /**
-     * @param string $id
-     * @return bool
-     */
-    public function has($id)
-    {
-        return $this->offsetExists($id);
-    }
 }

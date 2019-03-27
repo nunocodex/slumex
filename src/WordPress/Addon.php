@@ -3,7 +3,6 @@
 namespace NunoCodex\Slumex\WordPress;
 
 use NunoCodex\Slumex\Container\Container;
-use NunoCodex\Slumex\Container\ContainerInterface;
 
 /**
  * Class Addon
@@ -12,12 +11,13 @@ use NunoCodex\Slumex\Container\ContainerInterface;
 class Addon extends Container implements AddonInterface
 {
     /**
-     * @param HookProviderInterface $provider
+     * Addon constructor.
      * @param array $values
-     * @return ContainerInterface|$this
      */
-    public function registerHook(HookProviderInterface $provider, array $values = [])
+    public function __construct(array $values = [])
     {
-        return $this->registerProvider($provider, $values);
+        foreach ($values as $k => $v) {
+            $this->offsetSet($k, $v);
+        }
     }
 }

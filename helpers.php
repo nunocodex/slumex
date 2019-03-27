@@ -1,24 +1,5 @@
 <?php
 
-if (!function_exists('env')) {
-    /**
-     * @param string $key
-     * @param null|string $default
-     *
-     * @return string
-     */
-    function env(string $key, $default = null)
-    {
-        $env = getenv($key);
-
-        if (!$env) {
-            $env = $default;
-        }
-
-        return $env;
-    }
-}
-
 if (!function_exists('debug')) {
     /**
      * Debug extended function.

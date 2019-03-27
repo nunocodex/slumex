@@ -3,13 +3,13 @@
 namespace NunoCodex\Slumex\Container;
 
 use NunoCodex\Slumex\WordPress\HookProviderInterface;
-use Pimple\Container as PimpleContainer;
+use Illuminate\Container\Container as BaseContainer;
 
 /**
  * Class Container
  * @package NunoCodex\Slumex\Container
  */
-class Container extends PimpleContainer implements ContainerInterface
+class Container extends BaseContainer implements ContainerInterface
 {
     /**
      * @param ServiceProviderInterface|HookProviderInterface $provider

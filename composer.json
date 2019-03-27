@@ -7,9 +7,13 @@
         "email": "nunocodex@gmail.com"
     }],
     "require": {
-        "pimple/pimple": "^3.2",
         "vlucas/phpdotenv": "^3.3",
+<<<<<<< HEAD
         "hassankhan/config": "^2.0"
+=======
+        "illuminate/container": "^5.8",
+        "illuminate/config": "^5.8"
+>>>>>>> laravel-container
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

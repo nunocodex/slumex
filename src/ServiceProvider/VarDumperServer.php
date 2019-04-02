@@ -36,9 +36,7 @@ class VarDumperServer implements ServiceProviderInterface, ContainerAwareInterfa
         
         $fallbackDumper = \in_array(\PHP_SAPI, array('cli', 'phpdbg')) ? new CliDumper() : new HtmlDumper();
         
-        $host = $container->has('var_dump_server.host') ? (string) $container->get('var_dump_server.host') : 'tcp://127.0.0.1:9912';
-        
-        $dumper = new ServerDumper($host, $fallbackDumper, [
+        $dumper = new ServerDumper($container->get('var_dump_server.host', 'tcp://127.0.0.1:9912'), $fallbackDumper, [
             'cli' => new CliContextProvider(),
             'source' => new SourceContextProvider(),
         ]);

@@ -29,4 +29,18 @@ class Container extends BaseContainer implements ContainerInterface
     
         return $this;
     }
+    
+    /**
+     * @param string $id
+     * @param null|mixed $default
+     * @return mixed
+     */
+    public function get($id, $default = null)
+    {
+        if (!parent::has($id)) {
+            return $default;
+        }
+        
+        return parent::get($id);
+    }
 }

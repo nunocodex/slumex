@@ -23,12 +23,8 @@ class Config implements ServiceProviderInterface, ContainerAwareInterface
     {
         $container = $this->getContainer();
         
-        if (!$container->has('config.defaults')) {
-            return;
-        }
-        
         $container['config'] = function (Container $c) {
-            return new Repository($c->get('config.defaults'));
+            return new Repository($c->get('config.defaults', []));
         };
     }
     

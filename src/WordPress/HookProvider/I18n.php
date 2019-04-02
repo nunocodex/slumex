@@ -16,7 +16,7 @@ use NunoCodex\Slumex\WordPress\HookProviderTrait;
 class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwareInterface
 {
     use HookProviderTrait, ContainerAwareTrait;
-    
+
     /**
      * Register Service Provider
      */
@@ -25,17 +25,17 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
         if (did_action('plugins_loaded')) {
             $this->loadTextdomain();
         } else {
-            $this->addAction('plugins_loaded', 'loadTextdomain');
+            $this->addAction('plugins_loaded', $this->loadTextdomain());
         }
     }
-    
+
     /**
      * Load the text domain to localize the plugin.
      */
     protected function loadTextdomain()
     {
         $c = $this->getContainer();
-        
+
         $plugin_rel_path = dirname($c->get('plugin.basename')) . '/languages';
         load_plugin_textdomain($c->get('plugin.slug'), false, $plugin_rel_path);
     }

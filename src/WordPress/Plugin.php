@@ -2,6 +2,10 @@
 
 namespace NunoCodex\Slumex\WordPress;
 
+/**
+ * Class Plugin
+ * @package NunoCodex\Slumex\WordPress
+ */
 class Plugin extends Addon
 {
     /**

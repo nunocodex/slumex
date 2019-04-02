@@ -14,7 +14,7 @@ trait HookProviderTrait
      * @var array
      */
     protected $filter_map = [];
-    
+
     /**
      * Add a WordPress filter.
      *
@@ -33,7 +33,7 @@ trait HookProviderTrait
             $arg_count
         );
     }
-    
+
     /**
      * Add a WordPress action.
      *
@@ -49,7 +49,7 @@ trait HookProviderTrait
     {
         return $this->addFilter($hook, $method, $priority, $arg_count);
     }
-    
+
     /**
      * Remove a WordPress filter.
      *
@@ -68,7 +68,7 @@ trait HookProviderTrait
             $arg_count
         );
     }
-    
+
     /**
      * Remove a WordPress action.
      *
@@ -84,38 +84,38 @@ trait HookProviderTrait
     {
         return $this->removeFilter($hook, $method, $priority, $arg_count);
     }
-    
+
     /**
      * Get a unique ID for a hook based on the internal method, hook, and priority.
      *
      * @param  string $hook
-     * @param  string $method
+     * @param  callable $method
      * @param  int    $priority
      * @return bool|string
      */
     public function getWpFilterId($hook, $method, $priority)
     {
-        return _wp_filter_build_unique_id($hook, [$this, $method], $priority);
+        return _wp_filter_build_unique_id($hook, $method, $priority);
     }
-    
+
     /**
      * Map a filter to a closure that inherits the class' internal scope.
      *
      * This allows hooks to use protected and private methods.
      *
-     * @param  $id
-     * @param  $method
-     * @param  $arg_count
+     * @param  string $id
+     * @param  callable $method
+     * @param  int $arg_count
      * @return \Closure The callable actually attached to a WP hook
      */
     public function mapFilter($id, $method, $arg_count)
     {
         if (empty($this->filter_map[$id])) {
             $this->filter_map[$id] = function () use ($method, $arg_count) {
-                return call_user_func_array([$this, $method], array_slice(func_get_args(), 0, $arg_count));
+                return call_user_func_array($method, array_slice(func_get_args(), 0, $arg_count));
             };
         }
-        
+
         return $this->filter_map[$id];
     }
 }

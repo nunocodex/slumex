@@ -2,9 +2,26 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$app = new \NunoCodex\Slumex\Container\Container();
+/**
+ * @param null|string $id
+ * @return mixed|\NunoCodex\Slumex\Container\Container
+ */
+function App($id = null)
+{
+    static $app_container;
+    
+    if (!$app_container) {
+        $app_container = new \NunoCodex\Slumex\Container\Container();
+    }
+    
+    if (null !== $id and $app_container->has($id)) {
+        return $app_container->get($id);
+    }
+    
+    return $app_container;
+}
 
-$app
+App()
     ->register(new \NunoCodex\Slumex\ServiceProvider\DotEnv(), [
         'dot_env.path' => __DIR__
     ])
@@ -19,13 +36,13 @@ $app
 ;
 
 /** @var \Symfony\Component\Templating\EngineInterface $templater */
-$templater = $app->get('templater');
+$templater = App('templater');
 
 echo $templater->render('homepage.php', [
     'title' => 'Page Title',
     'body' => 'Page Body'
 ]);
 
-dump($app, $_ENV);
+dump(App(), $_ENV);
 
 echo microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];

@@ -11,6 +11,17 @@ use Illuminate\Container\Container as BaseContainer;
 class Container extends BaseContainer implements ContainerInterface
 {
     /**
+     * Container constructor.
+     * @param array $values
+     */
+    public function __construct(array $values = [])
+    {
+        foreach ($values as $key => $value) {
+            $this->offsetSet($key, $value);
+        }
+    }
+    
+    /**
      * @param ServiceProviderInterface $provider
      * @param array $values
      * @return ContainerInterface|$this

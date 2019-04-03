@@ -43,6 +43,6 @@ echo $templater->render('homepage.php', [
     'body' => 'Page Body'
 ]);
 
-dump(App(), $_ENV);
+dump(App(), $_ENV, App('templater.path_patterns'));
 
 echo "Time elapsed: " . microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];

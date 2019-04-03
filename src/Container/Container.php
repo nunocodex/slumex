@@ -2,7 +2,7 @@
 
 namespace NunoCodex\Slumex\Container;
 
-use Illuminate\Container\Container as BaseContainer;
+use Pimple\Container as BaseContainer;
 
 /**
  * Class Container
@@ -11,15 +11,14 @@ use Illuminate\Container\Container as BaseContainer;
 class Container extends BaseContainer implements ContainerInterface
 {
     /**
-     * Container constructor.
-     * @param array $values
+     * @var array
      */
-    public function __construct(array $values = [])
-    {
-        foreach ($values as $key => $value) {
-            $this->offsetSet($key, $value);
-        }
-    }
+    protected $providers = [];
+    
+    /**
+     * @var bool
+     */
+    protected $booted = false;
     
     /**
      * @param ServiceProviderInterface $provider
@@ -28,15 +27,22 @@ class Container extends BaseContainer implements ContainerInterface
      */
     public function register($provider, array $values = [])
     {
+        $this->providers[] = $provider;
+        
         if ($provider instanceof ContainerAwareInterface) {
             $provider->setContainer($this);
         }
     
+        $provider->register();
+    
+        // We not use the parent function
         foreach ($values as $k => $v) {
-            $this->offsetSet($k, $v);
+            $this[$k] = $v;
         }
     
-        $provider->register();
+        if ($provider instanceof BootableProviderInterface) {
+            $provider->boot();
+        }
     
         return $this;
     }
@@ -48,10 +54,19 @@ class Container extends BaseContainer implements ContainerInterface
      */
     public function get($id, $default = null)
     {
-        if (!parent::has($id)) {
+        if (!$this->has($id)) {
             return $default;
         }
         
-        return parent::get($id);
+        return $this->offsetGet($id);
+    }
+    
+    /**
+     * @param string $id
+     * @return bool
+     */
+    public function has($id)
+    {
+        return $this->offsetExists($id);
     }
 }

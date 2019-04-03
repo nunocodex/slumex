@@ -21,10 +21,10 @@ class Config implements ServiceProviderInterface, ContainerAwareInterface
      */
     public function register()
     {
-        $container = $this->getContainer();
-        
-        $container['config'] = function (Container $c) {
-            return new Repository($c->get('config.defaults', []));
+        $this->container['config.defaults'] = [];
+    
+        $this->container['config'] = function (Container $container) {
+            return new Repository($container->get('config.defaults'));
         };
     }
     

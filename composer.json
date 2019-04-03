@@ -8,11 +8,11 @@
     }],
     "require": {
         "vlucas/phpdotenv": "^3.3",
-        "illuminate/container": "^5.8",
         "illuminate/config": "^5.8",
         "guzzlehttp/guzzle": "^6.3",
         "yahnis-elsts/plugin-update-checker": "^4.5",
-        "symfony/templating": "^4.2"
+        "symfony/templating": "^4.2",
+        "pimple/pimple": "^3.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

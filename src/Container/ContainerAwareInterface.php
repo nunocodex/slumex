@@ -11,7 +11,7 @@ interface ContainerAwareInterface
     /**
      * @return ContainerInterface
      */
-    public function getContainer(): ContainerInterface;
+    public function getContainer();
     
     /**
      * @param ContainerInterface $container

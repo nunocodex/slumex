@@ -23,24 +23,25 @@ class Templater implements ServiceProviderInterface, ContainerAwareInterface
      */
     public function register()
     {
-        $container = $this->getContainer();
+        $this->container['templater.path_patterns'] = '';
         
-        //$container['templater.path_patterns'] = '';
-        
-        $container['templater.filesystem_loader'] = function (Container $c) {
-            return new FilesystemLoader($c->get('templater.path_patterns', []));
+        $this->container['templater.filesystem_loader'] = function (Container $container) {
+            return new FilesystemLoader($container->get('templater.path_patterns'));
         };
         
-        $container['templater.template_name_parser'] = function (Container $c) {
+        $this->container['templater.template_name_parser'] = function () {
             return new TemplateNameParser();
         };
         
-        $container['templater.php_engine'] = function (Container $c) {
-            return new PhpEngine($c->get('templater.template_name_parser'), $c->get('templater.filesystem_loader'));
+        $this->container['templater.php_engine'] = function (Container $container) {
+            return new PhpEngine(
+                $container->get('templater.template_name_parser'),
+                $container->get('templater.filesystem_loader')
+            );
         };
         
-        $container['templater'] = function (Container $c) {
-            return $c->get('templater.php_engine');
+        $this->container['templater'] = function (Container $container) {
+            return $container->get('templater.php_engine');
         };
     }
 }

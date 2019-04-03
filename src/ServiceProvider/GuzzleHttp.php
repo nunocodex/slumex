@@ -21,10 +21,10 @@ class GuzzleHttp implements ServiceProviderInterface, ContainerAwareInterface
      */
     public function register()
     {
-        $container = $this->getContainer();
-
-        $container['api.points.client'] = function (Container $c) {
-            return new Client($c->get('api.points.client.options', []));
-        };
+        $this->container['guzzle.client.options'] = [];
+        
+        $this->container['guzzle.client'] = $this->container->factory(function (Container $container) {
+            return new Client($container->get('guzzle.client.options'));
+        });
     }
 }

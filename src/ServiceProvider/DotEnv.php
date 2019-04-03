@@ -2,6 +2,8 @@
 
 namespace NunoCodex\Slumex\ServiceProvider;
 
+use NunoCodex\Slumex\Container\BootableProviderInterface;
+use NunoCodex\Slumex\Container\Container;
 use NunoCodex\Slumex\Container\ContainerAwareInterface;
 use NunoCodex\Slumex\Container\ContainerAwareTrait;
 use NunoCodex\Slumex\Container\ServiceProviderInterface;
@@ -10,7 +12,7 @@ use NunoCodex\Slumex\Container\ServiceProviderInterface;
  * Class DotEnv
  * @package NunoCodex\Slumex\ServiceProvider
  */
-class DotEnv implements ServiceProviderInterface, ContainerAwareInterface
+class DotEnv implements ServiceProviderInterface, BootableProviderInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
@@ -19,18 +21,18 @@ class DotEnv implements ServiceProviderInterface, ContainerAwareInterface
      */
     public function register()
     {
-        $container = $this->getContainer();
+        $this->container['dot_env.path'] = '/';
 
-        if (!$container->has('dot_env.path')) {
-            return;
-        }
-
-        $path = $container->get('dot_env.path');
-        
-        if (!file_exists($path . '/.env')) {
-            return;
-        }
-
-        (\Dotenv\Dotenv::create($container->get('dot_env.path')))->load();
+        $this->container['dot_env'] = function (Container $container) {
+            return \Dotenv\Dotenv::create($container->get('dot_env.path'));
+        };
+    }
+    
+    /**
+     * Boot Service Provider
+     */
+    public function boot()
+    {
+        $this->container->get('dot_env')->load();
     }
 }

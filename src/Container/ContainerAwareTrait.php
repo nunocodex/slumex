@@ -10,16 +10,14 @@ trait ContainerAwareTrait
     /**
      * Container
      *
-     * @var ContainerInterface
+     * @var ContainerInterface|\Pimple\Container|Container
      */
     protected $container;
-
+    
     /**
-     * Get Container
-     *
-     * @return ContainerInterface|Container
+     * @return Container|ContainerInterface|\Pimple\Container
      */
-    public function getContainer(): ContainerInterface
+    public function getContainer()
     {
         return $this->container;
     }

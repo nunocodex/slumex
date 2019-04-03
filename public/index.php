@@ -45,4 +45,4 @@ echo $templater->render('homepage.php', [
 
 dump(App(), $_ENV);
 
-echo microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+echo "Time elapsed: " . microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];

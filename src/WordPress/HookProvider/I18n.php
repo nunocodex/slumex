@@ -25,14 +25,14 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
         if (did_action('plugins_loaded')) {
             $this->loadTextdomain();
         } else {
-            $this->addAction('plugins_loaded', $this->loadTextdomain());
+            $this->addAction('plugins_loaded', $this, 'loadTextDomain');
         }
     }
 
     /**
      * Load the text domain to localize the plugin.
      */
-    protected function loadTextdomain()
+    public function loadTextdomain()
     {
         $c = $this->getContainer();
 

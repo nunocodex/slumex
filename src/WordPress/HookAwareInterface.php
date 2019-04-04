@@ -9,72 +9,48 @@ namespace NunoCodex\Slumex\WordPress;
 interface HookAwareInterface
 {
     /**
-     * Add a WordPress filter.
-     *
-     * @param  string   $hook
-     * @param  callable $method
-     * @param  int      $priority
-     * @param  int      $arg_count
-     * @return bool true
+     * @param string $hook
+     * @param object|null $component
+     * @param string $callback
+     * @param int $priority
+     * @param int $accepted_args
+     * @return $this
      */
-    function addFilter($hook, $method, $priority = 10, $arg_count = 1);
+    function addFilter(string $hook, $component, string $callback, int $priority = 10, int $accepted_args = 1);
     
     /**
-     * Add a WordPress action.
-     *
-     * This is an alias of add_filter().
-     *
-     * @param  string   $hook
-     * @param  callable $method
-     * @param  int      $priority
-     * @param  int      $arg_count
-     * @return bool true
+     * @param string $hook
+     * @param object|null $component
+     * @param string $callback
+     * @param int $priority
+     * @param int $accepted_args
+     * @return $this
      */
-    function addAction($hook, $method, $priority = 10, $arg_count = 1);
+    function addAction(string $hook, $component, string $callback, int $priority = 10, int $accepted_args = 1);
     
     /**
-     * Remove a WordPress filter.
-     *
-     * @param  string   $hook
-     * @param  callable $method
-     * @param  int      $priority
-     * @param  int      $arg_count
-     * @return bool Whether the function existed before it was removed.
+     * @param string $tag
+     * @param object|null $component
+     * @param string $callback
+     * @return $this
      */
-    function removeFilter($hook, $method, $priority = 10, $arg_count = 1);
+    function addShortcode(string $tag, $component, string $callback);
     
     /**
-     * Remove a WordPress action.
-     *
-     * This is an alias of remove_filter().
-     *
-     * @param  string   $hook
-     * @param  callable $method
-     * @param  int      $priority
-     * @param  int      $arg_count
-     * @return bool Whether the function is removed.
+     * @param string $hook
+     * @param object $component
+     * @param string $callback
+     * @param int $priority
+     * @return $this
      */
-    function removeAction($hook, $method, $priority = 10, $arg_count = 1);
+    function removeFilter(string $hook, $component, string $callback, int $priority = 10);
     
     /**
-     * Get a unique ID for a hook based on the internal method, hook, and priority.
-     *
-     * @param  string $hook
-     * @param  string $method
-     * @param  int    $priority
-     * @return bool|string
+     * @param string $hook
+     * @param object $component
+     * @param string $callback
+     * @param int $priority
+     * @return $this
      */
-    function getWpFilterId($hook, $method, $priority);
-    
-    /**
-     * Map a filter to a closure that inherits the class' internal scope.
-     *
-     * This allows hooks to use protected and private methods.
-     *
-     * @param  $id
-     * @param  $method
-     * @param  $arg_count
-     * @return \Closure The callable actually attached to a WP hook
-     */
-    function mapFilter($id, $method, $arg_count);
+    function removeAction(string $hook, $component, string $callback, int $priority = 10);
 }

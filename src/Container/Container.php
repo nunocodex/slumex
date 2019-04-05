@@ -11,24 +11,12 @@ use Pimple\Container as BaseContainer;
 class Container extends BaseContainer implements ContainerInterface
 {
     /**
-     * @var array
-     */
-    protected $providers = [];
-    
-    /**
-     * @var bool
-     */
-    protected $booted = false;
-    
-    /**
      * @param ServiceProviderInterface $provider
      * @param array $values
      * @return ContainerInterface|$this
      */
     public function register($provider, array $values = [])
     {
-        $this->providers[] = $provider;
-        
         if ($provider instanceof ContainerAwareInterface) {
             $provider->setContainer($this);
         }

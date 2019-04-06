@@ -259,8 +259,8 @@
     },
     {
         "name": "illuminate/config",
-        "version": "v5.8.8",
-        "version_normalized": "5.8.8.0",
+        "version": "v5.8.9",
+        "version_normalized": "5.8.9.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/config.git",
@@ -775,17 +775,17 @@
     },
     {
         "name": "symfony/console",
-        "version": "v4.2.4",
-        "version_normalized": "4.2.4.0",
+        "version": "v4.2.5",
+        "version_normalized": "4.2.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/console.git",
-            "reference": "9dc2299a016497f9ee620be94524e6c0af0280a9"
+            "reference": "24206aff3efe6962593297e57ef697ebb220e384"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/9dc2299a016497f9ee620be94524e6c0af0280a9",
-            "reference": "9dc2299a016497f9ee620be94524e6c0af0280a9",
+            "url": "https://api.github.com/repos/symfony/console/zipball/24206aff3efe6962593297e57ef697ebb220e384",
+            "reference": "24206aff3efe6962593297e57ef697ebb220e384",
             "shasum": ""
         },
         "require": {
@@ -814,7 +814,7 @@
             "symfony/lock": "",
             "symfony/process": ""
         },
-        "time": "2019-02-23T15:17:42+00:00",
+        "time": "2019-04-01T07:32:59+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1230,8 +1230,8 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.2.4",
-        "version_normalized": "4.2.4.0",
+        "version": "v4.2.5",
+        "version_normalized": "4.2.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
@@ -1362,23 +1362,23 @@
     },
     {
         "name": "yahnis-elsts/plugin-update-checker",
-        "version": "v4.5.1",
-        "version_normalized": "4.5.1.0",
+        "version": "v4.6",
+        "version_normalized": "4.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
-            "reference": "57a25d905a9a4db2fdb60bc8f0b0f861cc3ee110"
+            "reference": "45374e3c02126fbebebf0244c5d5da4c5e0166ac"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/57a25d905a9a4db2fdb60bc8f0b0f861cc3ee110",
-            "reference": "57a25d905a9a4db2fdb60bc8f0b0f861cc3ee110",
+            "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/45374e3c02126fbebebf0244c5d5da4c5e0166ac",
+            "reference": "45374e3c02126fbebebf0244c5d5da4c5e0166ac",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2.0"
         },
-        "time": "2019-01-04T17:13:39+00:00",
+        "time": "2019-04-02T17:56:11+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

@@ -6,19 +6,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
  * @param null|string $id
  * @return mixed|\NunoCodex\Slumex\Container\Container
  */
-function App($id = null)
+function App(string $id = null)
 {
-    static $app_container;
-    
-    if (!$app_container) {
-        $app_container = new \NunoCodex\Slumex\Container\Container();
-    }
-    
-    if (null !== $id and $app_container->has($id)) {
-        return $app_container->get($id);
-    }
-    
-    return $app_container;
+    return \NunoCodex\Slumex\Container\Container::create($id);
 }
 
 App()

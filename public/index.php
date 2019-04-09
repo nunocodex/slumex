@@ -8,7 +8,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
  */
 function App(string $id = null)
 {
-    return \NunoCodex\Slumex\Container\Container::create($id);
+    return \NunoCodex\Slumex\Container\Container::instance($id);
 }
 
 App()

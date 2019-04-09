@@ -16,17 +16,25 @@ class Container extends BaseContainer implements ContainerInterface
     private static $instance;
     
     /**
-     * @param string|null $id
-     * @return mixed|Container
+     * Container constructor.
      */
-    public static function create(string $id = null)
+    private function __construct()
+    {
+    
+    }
+    
+    /**
+     * @param string|null $id
+     * @return mixed|Container|ContainerInterface
+     */
+    public static function instance(string $id = null)
     {
         if (!self::$instance) {
             self::$instance = new self();
         }
-        
-        if (null !== $id and self::$instance->has($id)) {
-            return self::$instance->get($id);
+    
+        if (null !== $id and self::instance()->has($id)) {
+            return self::instance()->get($id);
         }
         
         return self::$instance;

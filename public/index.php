@@ -23,15 +23,24 @@ App()
     ->register(new \NunoCodex\Slumex\ServiceProvider\Templater(), [
         'templater.path_patterns' => __DIR__ . env('templater.path_patterns')
     ])
+    
+    ->register(new \NunoCodex\Slumex\ServiceProvider\Cache())
 ;
 
 /** @var \Symfony\Component\Templating\EngineInterface $templater */
 $templater = App('templater');
 
-echo $templater->render('homepage.php', [
-    'title' => 'Page Title',
-    'body' => 'Page Body'
-]);
+/** @var \Psr\SimpleCache\CacheInterface $cache */
+$cache = App('cache');
+
+if (!$cache->has('templater.data')) {
+    $cache->set('templater.data', [
+        'title' => 'Page Title',
+        'body' => 'Page Body'
+    ]);
+}
+
+echo $templater->render('homepage.php', $cache->get('templater.data'));
 
 dump(App(), $_ENV, App('templater.path_patterns'));
 

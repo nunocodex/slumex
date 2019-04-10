@@ -11,36 +11,6 @@ use Pimple\Container as BaseContainer;
 class Container extends BaseContainer implements ContainerInterface
 {
     /**
-     * @var Container|ContainerInterface
-     */
-    private static $instance;
-    
-    /**
-     * Container constructor.
-     */
-    private function __construct()
-    {
-    
-    }
-    
-    /**
-     * @param string|null $id
-     * @return mixed|Container|ContainerInterface
-     */
-    public static function instance(string $id = null)
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-    
-        if (null !== $id and self::instance()->has($id)) {
-            return self::instance()->get($id);
-        }
-        
-        return self::$instance;
-    }
-    
-    /**
      * @param ServiceProviderInterface $provider
      * @param array $values
      * @return ContainerInterface|$this

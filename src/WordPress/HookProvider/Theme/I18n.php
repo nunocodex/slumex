@@ -2,8 +2,6 @@
 
 namespace NunoCodex\Slumex\WordPress\HookProvider\Theme;
 
-
-use NunoCodex\Slumex\Container\BootableProviderInterface;
 use NunoCodex\Slumex\Container\ContainerAwareInterface;
 use NunoCodex\Slumex\Container\ContainerAwareTrait;
 use NunoCodex\Slumex\Container\ServiceProviderInterface;
@@ -14,7 +12,7 @@ use NunoCodex\Slumex\WordPress\HookProviderTrait;
  * Class I18n
  * @package NunoCodex\Slumex\WordPress\HookProvider\Theme
  */
-class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwareInterface, BootableProviderInterface
+class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwareInterface
 {
     use HookProviderTrait, ContainerAwareTrait;
 
@@ -23,7 +21,11 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
      */
     public function register()
     {
-    
+        if (!did_action('init')) {
+            $this
+                ->addAction('init', $this, 'loadTextDomain')
+            ;
+        }
     }
 
     /**
@@ -33,21 +35,7 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
     {
         $c = $this->getContainer();
 
-        $theme_rel_path = $c->get('theme.basename') . '/languages'; debug($theme_rel_path);
-        load_theme_textdomain($c->get('theme.slug'), $theme_rel_path);
+        $theme_rel_path = get_stylesheet_directory() . '/languages';
+        $res = load_theme_textdomain($c->get('theme.slug'), $theme_rel_path); debug($res, $theme_rel_path);
     }
-    
-    /**
-     * Boot Service Provider
-     */
-    public function boot()
-    {
-        if (did_action('after_setup_theme')) {
-            $this->loadTextdomain();
-        } else {
-            $this->addAction('after_setup_theme', $this, 'loadTextDomain');
-        }
-    }
-    
-    
 }

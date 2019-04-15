@@ -22,10 +22,10 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
      */
     public function register()
     {
-        if (did_action('plugins_loaded')) {
-            $this->loadTextdomain();
-        } else {
-            $this->addAction('plugins_loaded', $this, 'loadTextDomain');
+        if (!did_action('init')) {
+            $this
+                ->addAction('init', $this, 'loadTextDomain')
+            ;
         }
     }
 
@@ -36,7 +36,7 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
     {
         $c = $this->getContainer();
 
-        $plugin_rel_path = dirname($c->get('plugin.basename')) . '/languages';
+        $plugin_rel_path = dirname($c->get('plugin.basename')) . '/languages/';
         load_plugin_textdomain($c->get('plugin.slug'), false, $plugin_rel_path);
     }
 }

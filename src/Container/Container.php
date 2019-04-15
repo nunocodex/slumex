@@ -22,12 +22,12 @@ class Container extends BaseContainer implements ContainerInterface
         }
     
         $provider->register();
-    
+        
         // We not use the parent function
         foreach ($values as $k => $v) {
             $this[$k] = $v;
         }
-    
+        
         if ($provider instanceof BootableProviderInterface) {
             $provider->boot();
         }

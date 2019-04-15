@@ -7,4 +7,4 @@ namespace NunoCodex\Slumex\WordPress;
  * @package NunoCodex\Slumex\WordPress
  */
 class Theme extends Addon
-{ }
+{}

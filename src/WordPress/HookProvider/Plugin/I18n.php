@@ -1,6 +1,6 @@
 <?php
 
-namespace NunoCodex\Slumex\WordPress\HookProvider;
+namespace NunoCodex\Slumex\WordPress\HookProvider\Plugin;
 
 
 use NunoCodex\Slumex\Container\ContainerAwareInterface;
@@ -11,7 +11,7 @@ use NunoCodex\Slumex\WordPress\HookProviderTrait;
 
 /**
  * Class I18n
- * @package NunoCodex\Slumex\WordPress\HookProvider
+ * @package NunoCodex\Slumex\WordPress\HookProvider\Plugin
  */
 class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwareInterface
 {

@@ -53,4 +53,10 @@ interface HookAwareInterface
      * @return $this
      */
     function removeAction(string $hook, $component, string $callback, int $priority = 10);
+    
+    /**
+     * @param string $hook
+     * @return bool
+     */
+    function existsAction(string $hook): bool;
 }

@@ -36,6 +36,6 @@ class I18n implements ServiceProviderInterface, HookAwareInterface, ContainerAwa
         $c = $this->getContainer();
 
         $theme_rel_path = get_stylesheet_directory() . '/languages';
-        $res = load_theme_textdomain($c->get('theme.slug'), $theme_rel_path); debug($res, $theme_rel_path);
+        load_theme_textdomain($c->get('theme.slug'), $theme_rel_path);
     }
 }

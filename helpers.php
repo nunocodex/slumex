@@ -2,16 +2,15 @@
 
 if (!function_exists('debug')) {
     /**
-     * Debug extended function.
+     * Debug extended
+     *
+     * @param mixed ...$vars
      */
-    function debug()
+    function debug(...$vars)
     {
         if (!defined('DEBUG')) {
             return;
         }
-
-        $num_args = func_num_args();
-        $arg_list = func_get_args();
 
         $bt = debug_backtrace();
 
@@ -21,27 +20,25 @@ if (!function_exists('debug')) {
             $output = '[' . $bt[1]['function'] . '] ';
         }
 
-        for ($i = 0; $i < $num_args; ++$i) {
-            $arg = $arg_list[$i];
-
-            if (is_string($arg)) {
-                $arg_output = $arg;
+        foreach ($vars as $var) {
+            if (is_string($var)) {
+                $arg_output = $var;
             } else {
-                $arg_output = var_export($arg, true);
+                $arg_output = "\n" . var_export($var, true) . "\n";
             }
 
-            if ($arg === '') {
+            if ($var === '') {
                 $arg_output = '""';
-            } elseif ($arg === null) {
+            } elseif ($var === null) {
                 $arg_output = 'null';
             }
-
-            $output = $output . $arg_output . ' ';
+    
+            error_log('DEBUG: ' . $output . " " . $arg_output);
         }
 
         //$output = substr($output, 0, -1);
         //$output = substr($output, 0, 1024); // Restrict messages to 1024 characters in length
 
-        error_log('DEBUG: ' . $output);
+        //error_log('DEBUG: ' . $output);
     }
 }

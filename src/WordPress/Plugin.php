@@ -15,11 +15,9 @@ class Plugin extends Addon
     public function __construct(string $filename)
     {
         parent::__construct($filename);
-        
+
         $this['basename'] = plugin_basename($filename);
-        
         $this['directory'] = plugin_dir_path($filename);
-        
         $this['url'] = plugin_dir_url($filename);
     }
 }

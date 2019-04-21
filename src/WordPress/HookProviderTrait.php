@@ -8,53 +8,6 @@ namespace NunoCodex\Slumex\WordPress;
  */
 trait HookProviderTrait
 {
-    private $admin = false;
-    
-    private $frontend = false;
-    
-    private $action = false;
-    
-    private $filter = false;
-    
-    public function admin()
-    {
-        $this->admin = true;
-        
-        return $this;
-    }
-    
-    public function frontend()
-    {
-        $this->frontend = true;
-        
-        return $this;
-    }
-    
-    public function filter()
-    {
-        $this->filter = true;
-        
-        return $this;
-    }
-    
-    public function action()
-    {
-        $this->action = true;
-        
-        return $this;
-    }
-    
-    public function add(string $hook, $component, $callback, int $priority = 10, int $accepted_args = 1)
-    {
-        if ($this->admin and is_admin()) {
-            
-        } elseif ($this->frontend and !is_admin()) {
-        
-        } else {
-        
-        }
-    }
-    
     /**
      * @param string $hook
      * @param object|null $component

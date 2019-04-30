@@ -8,7 +8,7 @@ if (!function_exists('debug')) {
      */
     function debug(...$vars)
     {
-        if (!defined('DEBUG')) {
+        if (!defined('DEBUG') or !DEBUG) {
             return;
         }
 
@@ -24,7 +24,7 @@ if (!function_exists('debug')) {
             if (is_string($var)) {
                 $arg_output = $var;
             } else {
-                $arg_output = "\n" . var_export($var, true) . "\n";
+                $arg_output = var_export($var, true) . "\n";
             }
 
             if ($var === '') {
@@ -32,8 +32,8 @@ if (!function_exists('debug')) {
             } elseif ($var === null) {
                 $arg_output = 'null';
             }
-    
-            error_log('DEBUG: ' . $output . " " . $arg_output);
+
+            error_log('DEBUG: ' . $output . ' ' . $arg_output);
         }
 
         //$output = substr($output, 0, -1);

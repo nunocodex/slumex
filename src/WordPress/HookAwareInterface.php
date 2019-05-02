@@ -59,20 +59,4 @@ interface HookAwareInterface
      * @return bool
      */
     public function existsAction(string $hook): bool;
-
-    /**
-     * @param string $filename
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function registerActivation(string $filename, $component, $callback);
-
-    /**
-     * @param string $filename
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function registerDeactivation(string $filename, $component, $callback);
 }

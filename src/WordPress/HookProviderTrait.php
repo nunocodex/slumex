@@ -108,44 +108,4 @@ trait HookProviderTrait
     {
         return did_action($hook);
     }
-
-    /**
-     * @param string $filename
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function registerActivation(string $filename, $component, $callback)
-    {
-        register_activation_hook($filename, $this->getCallable($component, $callback));
-
-        return $this;
-    }
-
-    /**
-     * @param string $filename
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function registerDeactivation(string $filename, $component, $callback)
-    {
-        register_deactivation_hook($filename, $this->getCallable($component, $callback));
-
-        return $this;
-    }
-
-    /**
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return array|string
-     */
-    private function getCallable($component, $callback)
-    {
-        if (null === $component) {
-            return $callback;
-        }
-
-        return [$component, $callback];
-    }
 }

@@ -20,21 +20,21 @@ class Container extends BaseContainer implements ContainerInterface
         if ($provider instanceof ContainerAwareInterface) {
             $provider->setContainer($this);
         }
-    
+
         $provider->register();
-        
+
         // We not use the parent function
         foreach ($values as $k => $v) {
             $this[$k] = $v;
         }
-        
+
         if ($provider instanceof BootableProviderInterface) {
             $provider->boot();
         }
-    
+
         return $this;
     }
-    
+
     /**
      * @param string $id
      * @param null|mixed $default
@@ -45,10 +45,10 @@ class Container extends BaseContainer implements ContainerInterface
         if (!$this->has($id)) {
             return $default;
         }
-        
+
         return $this->offsetGet($id);
     }
-    
+
     /**
      * @param string $id
      * @return bool

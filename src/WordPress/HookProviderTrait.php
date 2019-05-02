@@ -24,10 +24,10 @@ trait HookProviderTrait
             $priority,
             $accepted_args
         );
-        
+
         return $this;
     }
-    
+
     /**
      * @param string $hook
      * @param object|null $component
@@ -44,10 +44,10 @@ trait HookProviderTrait
             $priority,
             $accepted_args
         );
-        
+
         return $this;
     }
-    
+
     /**
      * @param string $tag
      * @param object|null $component
@@ -60,46 +60,46 @@ trait HookProviderTrait
             $tag,
             $this->getCallable($component, $callback)
         );
-        
+
         return $this;
     }
-    
+
     /**
      * @param string $hook
      * @param object|null $component
-     * @param string $callback
+     * @param string|callable $callback
      * @param int $priority
      * @return $this
      */
-    public function removeFilter(string $hook, $component, string $callback, int $priority = 10)
+    public function removeFilter(string $hook, $component, $callback, int $priority = 10)
     {
         remove_filter(
             $hook,
             $this->getCallable($component, $callback),
             $priority
         );
-        
+
         return $this;
     }
-    
+
     /**
      * @param string $hook
      * @param object|null $component
-     * @param string $callback
+     * @param string|callable $callback
      * @param int $priority
      * @return $this
      */
-    public function removeAction(string $hook, $component, string $callback, int $priority = 10)
+    public function removeAction(string $hook, $component, $callback, int $priority = 10)
     {
         remove_action(
             $hook,
             $this->getCallable($component, $callback),
             $priority
         );
-        
+
         return $this;
     }
-    
+
     /**
      * @param string $hook
      * @return bool
@@ -108,7 +108,30 @@ trait HookProviderTrait
     {
         return did_action($hook);
     }
-    
+
+    /**
+     * @param string $filename
+     * @param object|null $component
+     * @param string|callable $callback
+     */
+    public function registerActivation(string $filename, $component, $callback)
+    {
+        register_activation_hook($filename, $this->getCallable($component, $callback));
+    }
+
+    /**
+     * @param string $filename
+     * @param object|null $component
+     * @param string|callable $callback
+     * @return $this
+     */
+    public function registerDeactivation(string $filename, $component, $callback)
+    {
+        register_deactivation_hook($filename, $this->getCallable($component, $callback));
+
+        return $this;
+    }
+
     /**
      * @param object|null $component
      * @param string|callable $callback
@@ -119,7 +142,7 @@ trait HookProviderTrait
         if (null === $component) {
             return $callback;
         }
-        
+
         return [$component, $callback];
     }
 }

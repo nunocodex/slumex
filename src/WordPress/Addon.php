@@ -8,8 +8,10 @@ use NunoCodex\Slumex\Container\Container;
  * Class Addon
  * @package NunoCodex\Slumex\WordPress
  */
-abstract class Addon extends Container implements AddonInterface
+abstract class Addon extends Container implements AddonInterface, HookAwareInterface
 {
+    use HookProviderTrait;
+
     /**
      * Addon constructor.
      * @param string $filename
@@ -22,43 +24,5 @@ abstract class Addon extends Container implements AddonInterface
         ];
 
         parent::__construct($values);
-    }
-
-    /**
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return array|string
-     */
-    protected function getCallable($component, $callback)
-    {
-        if (null === $component) {
-            return $callback;
-        }
-
-        return [$component, $callback];
-    }
-
-    /**
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function activate($component, $callback)
-    {
-        register_activation_hook($this->get('filename'), $this->getCallable($component, $callback));
-
-        return $this;
-    }
-
-    /**
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function deactivate($component, $callback)
-    {
-        register_deactivation_hook($this->get('filename'), $this->getCallable($component, $callback));
-
-        return $this;
     }
 }

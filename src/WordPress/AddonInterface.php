@@ -13,18 +13,4 @@ interface AddonInterface
      * @param string $filename
      */
     public function __construct(string $filename);
-
-    /**
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function activate($component, $callback);
-
-    /**
-     * @param object|null $component
-     * @param string|callable $callback
-     * @return $this
-     */
-    public function deactivate($component, $callback);
 }

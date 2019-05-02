@@ -108,4 +108,18 @@ trait HookProviderTrait
     {
         return did_action($hook);
     }
+
+    /**
+     * @param object|null $component
+     * @param string|callable $callback
+     * @return array|string
+     */
+    public function getCallable($component, $callback)
+    {
+        if (null === $component) {
+            return $callback;
+        }
+
+        return [$component, $callback];
+    }
 }

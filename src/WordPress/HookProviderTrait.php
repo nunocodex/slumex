@@ -113,10 +113,13 @@ trait HookProviderTrait
      * @param string $filename
      * @param object|null $component
      * @param string|callable $callback
+     * @return $this
      */
     public function registerActivation(string $filename, $component, $callback)
     {
         register_activation_hook($filename, $this->getCallable($component, $callback));
+
+        return $this;
     }
 
     /**

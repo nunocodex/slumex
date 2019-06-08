@@ -84,7 +84,7 @@ trait HookProviderTrait
 
     /**
      * @param string $hook
-     * @param object|null $component
+     * @param object|null|string $component
      * @param string|callable $callback
      * @param int $priority
      * @return $this
@@ -110,7 +110,7 @@ trait HookProviderTrait
     }
 
     /**
-     * @param object|null $component
+     * @param object|null|string $component
      * @param string|callable $callback
      * @return array|string
      */
